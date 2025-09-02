@@ -2,23 +2,46 @@
 
 This project analyzes unemployment trends in the Balkan region using R.
 
-## 📁 Project Structure
+Setup and Environment
+To ensure reproducibility, this project uses renv to manage R package dependencies.
 
-- `Scripts/`: Contains data processing scripts
-- `Balkan Unemployment v1.Rmd`: Main R Markdown report
-- `Balkan Unemployment.Rproj`: RStudio project file
+How to set up:
+Clone the repository:
 
-## ▶️ How to Run
+git clone https://github.com/asimovic-ui/Balkan-Unemployment-v1.git
+cd Balkan-Unemployment-v1
 
-1. Clone the repository
-2. Open the `.Rproj` file in RStudio
-3. Run `renv::restore()` to install the required packages
-4. Knit the `.Rmd` file or run scripts
 
-## 📦 Dependencies
+Open the project in RStudio by opening the .Rproj file.
 
-This project uses `renv` to manage packages. All dependencies are listed in `renv.lock`.
+Install renv if you don't have it:
 
-## 📜 License
+install.packages("renv")
 
-MIT License — feel free to use and adapt this work.
+Restore the exact package versions used in this project:
+
+renv::restore()
+
+How to Run the Analysis
+
+Run the scripts located in the /scripts folder in the following order:
+
+Data processing: BalkanUnemployment.data_processing.R
+
+Report: Knit the Balkan Unemployment v1.Rmd file
+
+Data Sources
+
+Data used in this project is sourced from (https://data.worldbank.org/).
+
+License
+
+This project is licensed under the MIT License — see the LICENSE file for details.
+
+Contact
+
+For questions or contributions, please contact:
+
+Aleksandra Simovic (aleksandra.simovic@hotmail.com)
+
+GitHub: https://github.com/asimovic-ui
