@@ -1,0 +1,19 @@
+# History files
+.Rhistory
+.RData
+
+# R project files
+.Rproj.user/
+
+# Package management
+renv/library/
+renv/python/
+
+# Output files
+*.pdf
+*.html
+*.docx
+
+# OS files
+.DS_Store
+Thumbs.db

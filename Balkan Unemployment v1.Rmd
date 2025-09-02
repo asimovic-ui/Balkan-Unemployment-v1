@@ -1,0 +1,84 @@
+---
+title: "Unemployment Rate in Total VS Unemployment Rate for Male in Balkan Countries"
+author: "Aleksandra Simovic"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(knitr)
+library(ggplot2)
+library(tidyr)
+```
+
+### Introduction
+
+The unemployment rate is a long-standing key labour market indicator, widely used around the world to communicate on the performance of the labour market and the economy’s ability to generate enough jobs for jobseekers. 
+The unemployment rate is a valuable measure of the mismatches between the labour supply and demand, casting light on the unutilized labour supply. 
+Given the unemployment rate’s significant analytical value and its importance for assessing the labour market, it is one of the most extensively produced and used labour market indicators.
+The unemployment rate is broadly used by numerous labour market agents, including politicians, policymakers, business owners, social partners, researchers, academics, students, journalists, and people in general interested in knowing about the labour market situation. 
+It can support labour market research and analysis, as well as the formulation and evaluation of labour market policies. 
+It is also used to communicate to the public on the labour market situation and trends. 
+The unemployment rate can also underpin labour market decisions of economic agents such as policymakers, businesses and individuals. 
+Both jobseekers and recruiters may adjust their criteria or expectations according to the variations of the unemployment rate, as these signal economic and labour market performance. 
+It is also a useful measure to track economic cycles, as trends in unemployment are often closely linked to economic performance and its variations. Unemployment patterns can reveal periods of recession and subsequent signs of recovery.
+
+In this short essay, the graph and table represent data relevant for Balkan Countries in Year 2022, for which both information about Unemployment Rate in Total and Unemployment Rate for Males has been determined and published on the [World Bank Open Data](https://data.worldbank.org/) website.
+
+---
+
+### Unemployment Data Table (2022)
+
+```{r data-table}
+unemployment_data <- data.frame(
+  Country = c("Greece", "Kosovo", "Montenegro", "North Macedonia", "Serbia"),
+  Total_Unemployment = c(12, 12, 15, 14, 8),
+  Male_Unemployment = c(9, 11, 16, 16, 8)
+)
+
+kable(unemployment_data, caption = "Table 1. Unemployment Rate Total vs. Male in 2022 for Balkan Countries")
+```
+
+In the above table, the unemployment rate per country for 2022 has been represented in percentage and sorted alphabetically. It shows that in each country, the majority of unemployed are women.
+
+---
+
+### Graph of Unemployment Rates
+
+Presenting the same information in graph, majority of unemployed male are in Montenegro and Macedonia. At the same chart it is visible that Male Unemployment in Greece is quite lower compared to the total Unemployment Rate. Serbia keeps the lowest rate in the region which can be also a sign that majority of population could be employed outside of the country as certain analysis showed increased migration to EU countries in the last 3 years. 
+
+
+```{r unemployment-graph, fig.width=8, fig.height=5}
+unemployment_long <- pivot_longer(
+  unemployment_data,
+  cols = c("Total_Unemployment", "Male_Unemployment"),
+  names_to = "Category",
+  values_to = "Rate"
+)
+
+unemployment_long$Category <- factor(
+  unemployment_long$Category,
+  levels = c("Total_Unemployment", "Male_Unemployment"),
+  labels = c("Total", "Male")
+)
+
+ggplot(unemployment_long, aes(x = Country, y = Rate, fill = Category)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.7)) +
+  labs(
+    title = "Unemployment Rates in Balkan Countries (2022)",
+    x = "Country",
+    y = "Unemployment Rate (%)",
+    fill = "Category"
+  ) +
+  scale_fill_manual(values = c("steelblue", "darkorange")) +
+  theme_minimal()
+```
+
+The graph above shows that the majority of unemployed males are in Montenegro and North Macedonia. Male unemployment in Greece is quite lower compared to the total rate. Serbia has the lowest rate overall, potentially due to increased emigration to EU countries in recent years.
+
+---
+
+### Conclusion
+
+This analysis highlights gender disparities in unemployment and broader socio-economic patterns such as migration. Understanding these trends is vital for policymakers and researchers addressing labour market dynamics and regional development.
